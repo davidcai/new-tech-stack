@@ -3,7 +3,94 @@ import { FullScreenCode, Split } from "mdx-deck/layouts"
 
 export { default as theme } from "./theme"
 
+# Mission of the New Tech Stack
+
+08-2018
+
+---
+
 # This is the title of my deck
+
+- Community support
+- Productivity
+- Forcing function
+- Clean slate
+
+```notes
+React Pros:
+- Virtual DOM - server side rendering
+  * Angular Universal is a library designed to make your app friendly to search engine and social media. This tool allows you to create projects that support server-side rendering. As for React, SSR can be set up without any additional tools since ‘renderToString’ comes from ‘react-dom’ package, which is used for client-side rendering.
+- JSX compiler
+- Just Javascript
+- Easy to learn
+- High level of flexibility and composability
+- Unopinonated
+- Separation of presentation and data - Smart vs dumb component (account-summary component)
+
+Angular Cons:
+- Heavy framework
+- RxJS
+- Template driven
+- Opinionated
+  * Opinionated framework needs a buy-in phase.
+  * As engineers, we should make educated choices rather than simply following opinions, even when the opinions coming from big players.
+- DI is not necessarily needed
+```
+
+---
+
+# RxJS
+
+```notes
+- The extreme power of RxJS entails its complexity to master.
+- if you’re just using it in place of a single callback function is not very useful
+- Backbone is every open and easy to do things outside the “intended” use; when in Angular doing things outside the intended patterns are much more difficult
+- Moreover, even with all of the great features Rx gives us - making it framework core is not the best approach. https://gist.github.com/Igogrek/36d47f7547b679e7dab2bc595e36c0e9
+- I think that people like me (who really like Rx) would've easily integrated it themselves if needed, instead of forcing it as default. This wasn't a problem for me, but a lot of people I know have a hard time understanding Observables, Subjects, etc. All of that on top of general Angular complexity seem to be very harsh on framework newcomers (most of those just cast HTTP resulted Observable to Promise).
+- 104 operators vs. Promise's 6 methods
+```
+
+---
+
+<Image src="assets/images/rxjs-api-list.png" size="contain" />
+
+---
+
+# Developer preference matters
+
+In GitHub, React has **109,545** stars and **6,244** watches while Angular has **39,862** and **3,174** watches respectively.
+
+---
+
+# State of JavaScript 2017
+
+Out of 20,000 developers surveyed, 7,600 developers said they are uninterested in Angular despite of being aware of its popularity while none of the developers said they are uninterested in React.
+
+---
+
+<Image src="assets/images/developer-acceptance.png" size="contain" />
+
+---
+
+# NPM downloads
+
+Number of npm loads in the past 6 months
+
+---
+
+<Image src="assets/images/npm-downloads.png" size="contain" />
+
+---
+
+# Market demand
+
+A 2018 survey of more than 60,000 worldwide open positions that require a specific knowledge of a certain framework.
+
+(source: indeed.com)
+
+---
+
+<Image src="assets/images/indeed-pie-chart.png" size="contain" />
 
 ---
 
