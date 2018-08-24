@@ -28,7 +28,7 @@ The generated HTML files can be found at the `dist` directory.
 npm run pdf
 ```
 
-Note: before running the above command, make sure `npm start` is stopped.
+Note: before running the above command, make sure the process of `npm start` is stopped. Otherwise, we will get an error about already-used port.
 
 The generated PDF can be found at the `dist` directory.
 
