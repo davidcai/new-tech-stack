@@ -1,0 +1,22 @@
+# Cache
+.cache
+
+# Editor
+.idea/
+.vscode/
+*.iml
+
+# Log files
+logs/
+*.log
+npm-debug.log*
+
+# Mac
+.DS_Store
+
+# Node
+node_modules/
+.npmrc
+
+# Output
+dist/

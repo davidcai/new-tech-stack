@@ -1,0 +1,18 @@
+{
+  "name": "new-tech-stack",
+  "version": "1.0.0",
+  "description": "New tech stack presentation deck",
+  "main": "index.js",
+  "scripts": {
+    "start": "mdx-deck src/deck.mdx",
+    "build": "mkdir -p dist/assets && cp -r src/assets/* $_ && mdx-deck build src/deck.mdx",
+    "pdf": "mdx-deck pdf src/deck.mdx",
+    "clean": "rm -rf dist/",
+    "screenshot": "mdx-deck screenshot src/deck.mdx"
+  },
+  "author": "David Cai",
+  "license": "ISC",
+  "devDependencies": {
+    "mdx-deck": "^1.6.4"
+  }
+}

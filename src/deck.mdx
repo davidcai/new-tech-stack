@@ -1,0 +1,46 @@
+import { Appear, Image } from "mdx-deck"
+import { FullScreenCode, Split } from "mdx-deck/layouts"
+
+export { default as theme } from "./theme"
+
+# This is the title of my deck
+
+---
+
+# About Me
+
+---
+
+```jsx
+<CodeSnippet />
+```
+
+---
+
+<Image src="assets/images/puppet.jpg" />
+
+---
+
+<ul>
+  <Appear>
+    <li>One</li>
+    <li>Two</li>
+    <li>Three</li>
+  </Appear>
+</ul>
+
+---
+
+export default Split
+
+![](assets/images/puppet.jpg)
+
+## Meow
+
+---
+
+export default FullScreenCode
+
+```jsx
+<Button>Beep</Button>
+```
