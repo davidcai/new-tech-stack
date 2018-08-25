@@ -29,19 +29,39 @@ React Pros:
 
 Angular Cons:
 - Heavy framework
+  * Too many terminologies - It even speaks its own language - structural directives, pipes, declarations, modules, injectors, services, view encapsulation, decorators.
+  * Large learning curve
 - RxJS
 - Template driven
+  * HTML parser
+  * Or use AOT compiler. But AOT has a lot of constraints of how you write your code
+    * https://angular.io/guide/aot-compiler#how-aot-works
+    * Issue: No default export class (https://github.com/angular/angular/issues/11402). Open since 9/6/2016
+    * Having two different compilers is dangerous.
 - Opinionated
   * Opinionated framework needs a buy-in phase.
   * As engineers, we should make educated choices rather than simply following opinions, even when the opinions coming from big players.
 - DI is not necessarily needed
+- Native ShadowDOM support is minimal (https://caniuse.com/#feat=shadowdom)
+  * Make people question the maturity of Angular
 ```
+
+---
+
+<Image src="assets/images/shadow-dom-support.png" size="contain" />
+
+---
+
+<Image src="assets/images/shadow-dom-emulation.png" size="contain" />
 
 ---
 
 # RxJS
 
 ```notes
+- Angular’s HTTP client returns Observables instead of Promises, forcing you not only to learn another async library, but a completely different async paradigm.
+- Observables offers little tangible improvements over Promises when used for Ajax requests.
+- Many Rx.js methods are illustrated using streams like this. This is semantically suitable for data that are actually streams, but far too over-engineered for single value requests.
 - The extreme power of RxJS entails its complexity to master.
 - if you’re just using it in place of a single callback function is not very useful
 - Backbone is every open and easy to do things outside the “intended” use; when in Angular doing things outside the intended patterns are much more difficult
@@ -53,6 +73,38 @@ Angular Cons:
 ---
 
 <Image src="assets/images/rxjs-api-list.png" size="contain" />
+
+---
+
+Special DSL just for a For loop:
+
+```html
+<ul>
+  <li *ngFor="let item of items; let i = index; trackBy: trackByFn">...</li>
+</ul>
+```
+
+React:
+
+```jsx
+<ul>
+  {items.map((item, index) => <li key={index}>...</li>)}
+</ul>
+```
+
+---
+
+Angular:
+
+```html
+<p>{{ name | slice:1:5 }}</p>
+```
+
+React:
+
+```jsx
+<p>{name.slice(1,5)}</p>
+```
 
 ---
 
