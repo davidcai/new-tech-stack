@@ -11,9 +11,9 @@ export { default as theme } from "./theme"
 
 # Context
 
-- A fresh look into the existing tech Stack.
+A fresh look into the existing tech Stack.
 
-- Re-evaluate technical choices for front-end development.
+Re-evaluate technical choices for front-end development.
 
 ---
 
@@ -25,6 +25,8 @@ export { default as theme } from "./theme"
 
 - Community
 
+- Maturity
+
 ```notes
 - Forcing function
 - Clean slate
@@ -34,11 +36,11 @@ export { default as theme } from "./theme"
 
 # Productivity
 
-* Imagine yourself as a **new hire**
+Imagine yourself as a **new hire**
 
-* How **easy** is it to adopt the tech stack?
+How **easy** is it to adopt the tech stack?
 
-* How **fast** is it to develop a new feature?
+How **fast** is it to develop a new feature?
 
 ---
 
@@ -68,13 +70,18 @@ export { default as theme } from "./theme"
 
 ---
 
-# Angular: RxJS
+# Angular:
+# RxJS and Observables
 
-- Angular HTTP client returns Observables
+---
 
-- RxJS is an implementation of Observables
+## Angular: RxJS
 
-- Observables are suitable for stream-like data
+Angular HTTP client returns Observables
+
+RxJS is an implementation of Observables
+
+Observables are suitable for stream-like data
 
 ```notes
 - Angular’s HTTP client returns Observables instead of Promises, forcing you not only to learn another async library, but a completely different async paradigm.
@@ -96,15 +103,13 @@ export { default as theme } from "./theme"
 
 ## Angular: RxJS
 
-- Require a paradigm shift to RFP (Reactive Functional Programming)
+Require a paradigm shift to RFP (Reactive Functional Programming)
 
-- Over-complicate for most REST API calls
+Over-complicate for most REST API calls
 
 ---
 
-## Angular: RxJS
-
-- RxJS' 104 operators vs. Promise's 7 methods
+RxJS' **104** operators vs. Promise's **7** methods
 
 ---
 
@@ -120,7 +125,7 @@ export { default as theme } from "./theme"
 
 ---
 
-We literally rejcted interview candidates because they don't know RxJS. But RxJS is not as widely accepted in JavaScript community as we thought.
+We literally rejcted interview candidates because they don't know Observable APIs. But RxJS is not as widely accepted in the JavaScript community as we thought.
 
 ---
 
@@ -134,29 +139,280 @@ To learn more:
 
 ---
 
-## Bring back Productivity
+## Back to our Goals
 
-- Again, imagine yourself as a new hire
+Again, imagine yourself as a new hire
 
-- Embrace simple and effective solutions
+**Productiviy**: embrace simple and effective solutions
 
-- Use something widely supported from the community
-
----
-
-## New tech stack proposal
-
-- Replace Angular's HTTP client with Promise-based HTTP client
-
-- Use RxJS observables only where they fit
+**Community**: Use something widely supported from the community
 
 ---
 
-# Angular: Template
+## How can we get there?
+
+Replace Angular's HTTP client with Promise based client (e.g., Axios)
+
+Use RxJS observables only where they are appropriate
 
 ---
 
-# RxJS
+# Angular:
+# HTML Template
+
+---
+
+Angular template has its own DSL syntax:
+
+```html
+<p>{{ name | slice:1:5 }}</p>
+```
+
+---
+
+At first, you might think the DSL syntax is OK. But it can quickly get unwieldy.
+
+---
+
+for loop
+
+```html
+<ul>
+  <li *ngFor="let item of items; let i = index; trackBy: trackByFn">
+    {{item.id}}
+  </li>
+</ul>
+```
+
+Special syntax just for a loop.
+
+---
+
+if-else
+
+```html
+<div *ngIf="someCondition; else falsyTemplate">
+  <h1>Condition Passed!</h1>
+</div>
+
+<ng-template #falsyTemplate>
+  <h1>Condition Failed!</h1>
+</ng-template>
+```
+
+Again, special syntax just for if and else. Angular 4 even touts “else” with *ngIf as a new feature.
+
+---
+
+<Image src="assets/images/ng-if-else.png" size="contain" />
+
+---
+
+When developer's fluency in basic **if-else** statements is in question, what do you think how productive they will code?
+
+---
+
+## Angular: HTML Template
+
+This DSL syntax resembles FreeMarker template.
+
+Template-driven frameworks all invent their own DSLs which are not standard anywhere else.
+
+```notes
+The knowledge required to work with these DSLs cannot be borrowed from outside, and cannot be exported to the ourside world.
+```
+
+---
+
+## How do we improve?
+
+Re-use what JavaScript developers already know -- JavaScript
+
+No need for DSL for basic statements
+
+---
+
+For example, instead of having:
+```html
+<div *ngIf="someCondition; else falsyTemplate">
+  <h1>Condition Passed!</h1>
+</div>
+
+<ng-template #falsyTemplate>
+  <h1>Condition Failed!</h1>
+</ng-template>
+```
+
+switch to JavaScript ternary operator
+```jsx
+<div>
+  {someCondition ? <h1>Condition Passed!</h1> : <h1>Condition Failed!</h1>}
+</div>
+```
+
+---
+
+Every software developer knows ternary operators:
+
+`(condition? A: B)`
+
+No ramp up time required to learn a special DSL
+
+---
+
+More exmaple: a list component using Angular's *ngForOf
+
+```js
+@Component({
+  ...
+  template: `<ul>
+    <li *ngFor="let item of items; let i = index; trackBy: trackByFn">
+      {{item.id}}
+    </li>
+  </ul>`,
+})
+export class App {
+  ...
+  trackByFn(index, item) {
+    return index;
+  }
+}
+```
+
+---
+
+Same component in React with JavaScript's `map` function
+
+```jsx
+function App({items}) {
+  return <ul>
+    {items.map((item, index) => <li key={index}>{item.id}</li>)}
+  </ul>
+};
+```
+
+---
+
+Even more exmaple:
+
+Angular slice filter. Again, special DSL:
+```html
+<p>{{ name | slice:1:5 }}</p>
+```
+
+React. Array's built-in `slice` function:
+```jsx
+<p>{name.slice(1,5)}</p>
+```
+
+---
+
+| Angular       | Plain JavaScript                       |
+| ------------- |:--------------------------------------:|
+| *ngForOf      | Array.map                              |
+| *ngIf         | if-else statement or ternary operator  |
+| filter pipe   | plain function                         |
+
+Angular invented a DSL syntax because the framework is template driven.
+
+The DSL deviates away from common JS knowledge.
+
+All these smalls could potentially add up to the loss of daily productivity.
+
+---
+
+## Recap: how do we improve?
+
+Once more, imagine yourself as a new hire
+
+**Productivity**: leverage JavaScript to deal with logics and code path
+
+**Productivity**: Use standard JavaScript APIs rather than awkward DSLs
+
+---
+
+# Angular:
+# Tool Chain
+
+---
+
+## Angular: Ng CLI
+
+Ng CLI is Angular's recommended building tools
+
+Widely adopted for its out-of-box functionalities
+
+---
+
+... however, it is **over-abstracted** and **inflexible**.
+
+---
+
+## Angular CLI and Webpack
+
+Webpack is the centerpiece of the building process.
+
+It governs code splitting, minimization, optimization, post processing, transformation, bundling, etc.
+
+It is very important for developers to have **full control of webpack configuration**.
+
+---
+
+However, in Angualr webpack configuration is generated and encapsulated.
+
+...where in React and Vue, developers have **direct access** to webpack configuration.
+
+---
+
+<Image src="assets/images/webpack-lightweight.png" size="contain" />
+
+---
+
+Angular's `ng eject` command can be used to "eject" webpack configuration.
+
+... but even this feature will be **disabled in Angular 6**.
+
+---
+
+## Angular 6 and Webpack
+
+Angular 6 will introduce *a new builder system* which is an abstraction layer on top of many building processes including webpack.
+
+However, this system is **not ready**. And no announcement of when it will be ready.
+
+---
+
+<Image src="assets/images/webpack-ng6-soon.png" size="contain" />
+
+---
+
+Even when the new builder system is ready in an unknown future, I doubt why we need yet another build system to abstract most already well known build tools, including Webpack.
+
+---
+
+Most of the build tools' documentation are **more complete** than Angular CLI's.
+
+Most of the build tools have **faster innovation cycles** than Angluar CLI's.
+
+This over abstraction is **unnecessary** and even **dangerous**.
+
+---
+
+<Image src="assets/images/webpack-lockin.png" size="contain" />
+
+---
+
+Our business requires high-level of customization and performance.
+
+Having full control of our building process is essential to create highly customizable and scalable web apps.
+
+---
+
+
+
+---
+
+<Image src="assets/images/webpack-kindergarten.png" size="contain" />
 
 ---
 
@@ -199,71 +455,6 @@ Angular Cons:
 
 # Productivity
 
-A simple component implemented in Angular:
-
-```js
-@Component({
-  ...
-  template: `<ul>
-    <li *ngFor="let item of items; let i = index; trackBy: trackByFn">{{item.id}}</li>
-  </ul>`,
-})
-export class App {
-  ...
-  trackByFn(index, item) {
-    return index;
-  }
-}
-```
-
----
-
-# Productivity
-
-Same component implemented in React:
-
-```jsx
-export const App = ({items}) => <ul>
-  {items.map((item, index) => <li key={index}>{item.id}</li>)}
-</ul>;
-```
-
----
-
-# Productivity
-
-if else logic in Angula template:
-
-```html
-<div *ngIf="someCondition; else falsyTemplate">
-  <h1>Condition Passed!</h1>
-</div>
-
-<ng-template #falsyTemplate>
-  <h1>Condition Failed!</h1>
-</ng-template>
-```
-
----
-
-# Productivity
-
-Same logic in React:
-
-```jsx
-<div>
-  <h1>{someCondition ? "Condition Passed!" : "Condition Failed!"}</h1>
-</div>
-```
-
----
-
-<Image src="assets/images/ng-if-else.png" size="contain" />
-
----
-
-# Productivity
-
 Code assisance for Styled-Component dynamic props
 
 ---
@@ -286,21 +477,6 @@ Unit test styles.
 
 ---
 
-Special DSL just for a For loop:
-
-```html
-<ul>
-  <li *ngFor="let item of items; let i = index; trackBy: trackByFn">...</li>
-</ul>
-```
-
-React:
-
-```jsx
-<ul>
-  {items.map((item, index) => <li key={index}>...</li>)}
-</ul>
-```
 
 ---
 
