@@ -5,23 +5,170 @@ export { default as theme } from "./theme"
 
 # Mission of the New Tech Stack
 
-08-2018
+2018
 
 ---
 
-# This is the title of my deck
+# Context
 
-- Community support
+- A fresh look into the existing tech Stack.
+
+- Re-evaluate technical choices for front-end development.
+
+---
+
+# Goals
+
 - Productivity
+
+- Maintainability
+
+- Community
+
+```notes
 - Forcing function
 - Clean slate
+```
+
+---
+
+# Productivity
+
+* Imagine yourself as a **new hire**
+
+* How **easy** is it to adopt the tech stack?
+
+* How **fast** is it to develop a new feature?
+
+---
+
+# New hire: Tech stack adoption
+
+- Immediately face:
+
+  A UI framework - Angular
+
+  And its tool chain - Angular's ng CLI
+
+---
+
+# Angular is a framework
+
+- ... and a heavily opinionated one:
+
+  Many special terminologies
+
+  RxJS
+
+  Template driven
+
+---
+
+# Angular: Special terminologies
+
+---
+
+# Angular: RxJS
+
+- Angular HTTP client returns Observables
+
+- RxJS is an implementation of Observables
+
+- Observables are suitable for stream-like data
+
+```notes
+- Angular’s HTTP client returns Observables instead of Promises, forcing you not only to learn another async library, but a completely different async paradigm.
+- Observables offers little tangible improvements over Promises when used for Ajax requests.
+- Many Rx.js methods are illustrated using streams like this. This is semantically suitable for data that are actually streams, but far too over-engineered for single value requests.
+- The extreme power of RxJS entails its complexity to master.
+- if you’re just using it in place of a single callback function is not very useful
+- Backbone is every open and easy to do things outside the “intended” use; when in Angular doing things outside the intended patterns are much more difficult
+- Moreover, even with all of the great features Rx gives us - making it framework core is not the best approach. https://gist.github.com/Igogrek/36d47f7547b679e7dab2bc595e36c0e9
+- I think that people like me (who really like Rx) would've easily integrated it themselves if needed, instead of forcing it as default. This wasn't a problem for me, but a lot of people I know have a hard time understanding Observables, Subjects, etc. All of that on top of general Angular complexity seem to be very harsh on framework newcomers (most of those just cast HTTP resulted Observable to Promise).
+- 104 operators vs. Promise's 6 methods
+```
+
+---
+
+## ... but making it framework core is not the best approach
+
+---
+
+## Angular: RxJS
+
+- Require a paradigm shift to RFP (Reactive Functional Programming)
+
+- Over-complicate for most REST API calls
+
+---
+
+## Angular: RxJS
+
+- RxJS' 104 operators vs. Promise's 7 methods
+
+---
+
+<Image src="assets/images/rxjs-api-list.png" size="contain" />
+
+---
+
+<Image src="assets/images/promise-api.png" size="initial" />
+
+---
+
+> ... A lot of people I know have a hard time understanding Observables, Subjects, etc. All of that on top of general Angular complexity seem to be very harsh on framework newcomers.
+
+---
+
+We literally rejcted interview candidates because they don't know RxJS. But RxJS is not as widely accepted in JavaScript community as we thought.
+
+---
+
+## Angular: RxJS
+
+To learn more:
+
+[Why isn't RxJS more popular?](https://www.reddit.com/r/javascript/comments/4austh/why_isnt_rxjs_more_popular_are_there_bad_parts/)
+
+[RxJS is great. So why have I moved on?](https://medium.com/@puppybits/rxjs-is-great-so-why-have-i-moved-on-534c513e7af3)
+
+---
+
+## Bring back Productivity
+
+- Again, imagine yourself as a new hire
+
+- Embrace the simple and effective solution
+
+- Use something widely supported from the community
+
+---
+
+## New tech stack proposal
+
+- Replace Angular's HTTP client with Promise-based HTTP client
+
+- Use RxJS observables only where they fit
+
+---
+
+# Angular: Template
+
+---
+
+# RxJS
+
+---
 
 ```notes
 React Pros:
 - Virtual DOM - server side rendering
   * Angular Universal is a library designed to make your app friendly to search engine and social media. This tool allows you to create projects that support server-side rendering. As for React, SSR can be set up without any additional tools since ‘renderToString’ comes from ‘react-dom’ package, which is used for client-side rendering.
+  * React Native for iOS and Andriod - allowing developers to share 90% or more of the code across mobile platforms with truly native rendering performance.
+  * Microsoft would later release React Native libraries for building Windows applications
+  * Facebook released Snapchat-like features across Instagram, Messenger, WhatsApp, and Facebook. Blocked Snapchat's growth.
 - JSX compiler
-- Just Javascript
+- JS-first philosophy - Just Javascript
 - Easy to learn
 - High level of flexibility and composability
 - Unopinonated
@@ -38,6 +185,8 @@ Angular Cons:
     * https://angular.io/guide/aot-compiler#how-aot-works
     * Issue: No default export class (https://github.com/angular/angular/issues/11402). Open since 9/6/2016
     * Having two different compilers is dangerous.
+  * Angular 4’s release notes even went as far to tout “else” with *ngIf as a new feature.
+  * It can take 10x as much code in Angular and more wiring and ceremony to describe the same output. (Productivity)
 - Opinionated
   * Opinionated framework needs a buy-in phase.
   * As engineers, we should make educated choices rather than simply following opinions, even when the opinions coming from big players.
@@ -48,31 +197,92 @@ Angular Cons:
 
 ---
 
+# Productivity
+
+A simple component implemented in Angular:
+
+```js
+@Component({
+  ...
+  template: `<ul>
+    <li *ngFor="let item of items; let i = index; trackBy: trackByFn">{{item.id}}</li>
+  </ul>`,
+})
+export class App {
+  ...
+  trackByFn(index, item) {
+    return index;
+  }
+}
+```
+
+---
+
+# Productivity
+
+Same component implemented in React:
+
+```jsx
+export const App = ({items}) => <ul>
+  {items.map((item, index) => <li key={index}>{item.id}</li>)}
+</ul>;
+```
+
+---
+
+# Productivity
+
+if else logic in Angula template:
+
+```html
+<div *ngIf="someCondition; else falsyTemplate">
+  <h1>Condition Passed!</h1>
+</div>
+
+<ng-template #falsyTemplate>
+  <h1>Condition Failed!</h1>
+</ng-template>
+```
+
+---
+
+# Productivity
+
+Same logic in React:
+
+```jsx
+<div>
+  <h1>{someCondition ? "Condition Passed!" : "Condition Failed!"}</h1>
+</div>
+```
+
+---
+
+<Image src="assets/images/ng-if-else.png" size="contain" />
+
+---
+
+# Productivity
+
+Code assisance for Styled-Component dynamic props
+
+---
+
+# Maintainability
+
+Unit test styles.
+
+```notes
+- Show an example of styled component.
+```
+
+---
+
 <Image src="assets/images/shadow-dom-support.png" size="contain" />
 
 ---
 
 <Image src="assets/images/shadow-dom-emulation.png" size="contain" />
-
----
-
-# RxJS
-
-```notes
-- Angular’s HTTP client returns Observables instead of Promises, forcing you not only to learn another async library, but a completely different async paradigm.
-- Observables offers little tangible improvements over Promises when used for Ajax requests.
-- Many Rx.js methods are illustrated using streams like this. This is semantically suitable for data that are actually streams, but far too over-engineered for single value requests.
-- The extreme power of RxJS entails its complexity to master.
-- if you’re just using it in place of a single callback function is not very useful
-- Backbone is every open and easy to do things outside the “intended” use; when in Angular doing things outside the intended patterns are much more difficult
-- Moreover, even with all of the great features Rx gives us - making it framework core is not the best approach. https://gist.github.com/Igogrek/36d47f7547b679e7dab2bc595e36c0e9
-- I think that people like me (who really like Rx) would've easily integrated it themselves if needed, instead of forcing it as default. This wasn't a problem for me, but a lot of people I know have a hard time understanding Observables, Subjects, etc. All of that on top of general Angular complexity seem to be very harsh on framework newcomers (most of those just cast HTTP resulted Observable to Promise).
-- 104 operators vs. Promise's 6 methods
-```
-
----
-
-<Image src="assets/images/rxjs-api-list.png" size="contain" />
 
 ---
 
