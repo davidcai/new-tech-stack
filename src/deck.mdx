@@ -155,11 +155,9 @@ At first glance, you might think the DSL syntax is OK. But it could get unwieldy
 Special DSL just for a loop
 
 ```html
-<ul>
-  <li *ngFor="let item of items; let i = index; trackBy: trackByFn">
-    {{item.id}}
-  </li>
-</ul>
+<li *ngFor="let item of items; let i = index; trackBy: trackByFn">
+  {{item.id}}
+</li>
 ```
 
 ---
@@ -445,6 +443,48 @@ Use *npm* or *yarn* in place of Angular's *ng cli*.
 
 ---
 
+# Page Frame
+
+---
+
+An umbrella component that centralize common UI aspects such as:
+
+Page header, footer, error pages, debug footer, confirm ID, loading spinner, nav bar, etc.
+
+---
+
+## Often heard complaints
+
+- Performance
+
+- Feels too heavy and app doesn't have enough control
+
+---
+
+## Proposal
+
+Re-evaluate dumb vs. smart components.
+
+Clear separation of data and presentation.
+
+Expose services to apps, and give apps more control.
+
+---
+
+# Other areas
+
+---
+
+fe-business-lib - Make the service lib UI agnostic
+
+GraphQL
+
+Text resolution
+
+Settings and configs
+
+---
+
 # Tech stack exploration
 
 ---
@@ -578,7 +618,7 @@ HTML, CSS, and JavaScript -- all 3 main building blocks of web apps can now be v
 
 ## Developer preference matters
 
-In GitHub, React has **109,545** stars and **6,244** watches while Angular has **39,862** and **3,174** watches respectively.
+In GitHub, React has **109,545** stars and 6,244 watches while Angular has **39,862** and 3,174 watches respectively.
 
 React Router has **32,176** stars, which is not included in the React count listed above.
 
