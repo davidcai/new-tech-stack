@@ -8,7 +8,9 @@
     "build": "mkdir -p dist/assets && cp -r src/assets/* $_ && mdx-deck build src/deck.mdx",
     "pdf": "mdx-deck pdf src/deck.mdx",
     "clean": "rm -rf dist/",
-    "screenshot": "mdx-deck screenshot src/deck.mdx"
+    "screenshot": "mdx-deck screenshot src/deck.mdx",
+    "predeploy": "npm run clean && npm run build && npm run pdf",
+    "deploy": "rm -rf docs && cp -R dist docs/"
   },
   "author": "David Cai",
   "license": "ISC",

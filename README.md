@@ -32,6 +32,16 @@ Note: before running the above command, make sure the process of `npm start` is 
 
 The generated PDF can be found at the `dist` directory.
 
+## Deploy
+
+Deploy presentation in HTML and PDF formats to `docs/` directory:
+
+```
+npm run deploy
+```
+
+Then commit and push the changes to git.
+
 ## Source
 
 The deck file can be found at `src/deck.mdx`.
