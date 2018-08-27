@@ -3,17 +3,13 @@ import { FullScreenCode, Split } from "mdx-deck/layouts"
 
 export { default as theme } from "./theme"
 
-# Mission of the New Tech Stack
-
-2018
+# Mission of the New Techology Infrastructure
 
 ---
 
-# Context
+A fresh look into the existing tech stack.
 
-A fresh look into the existing tech Stack.
-
-Re-evaluate technical choices for front-end development.
+Re-evaluate technical choices for web app development.
 
 ---
 
@@ -34,39 +30,29 @@ Re-evaluate technical choices for front-end development.
 
 ---
 
-# Productivity
-
 Imagine yourself as a **new hire**
 
 How **easy** is it to adopt the tech stack?
 
 How **fast** is it to develop a new feature?
 
----
+How **sustainable** is it to maintain the tech stack over time?
 
-# New hire: Tech stack adoption
-
-- Immediately face:
-
-  A UI framework - Angular
-
-  And its tool chain - Angular's ng CLI
+How **flexiable** is it to customize the tech stack?
 
 ---
 
-# Angular is a framework
-
-- ... and a heavily opinionated one:
-
-  Many special terminologies
-
-  RxJS
-
-  Template driven
+These are the questions we should constantly ask ourselves when exploring a new tech stack.
 
 ---
 
-# Angular: Special terminologies
+# The core of existing tech stack -- Angular
+
+---
+
+## Angular -- a framework
+
+... and a heavily opinionated one.
 
 ---
 
@@ -77,11 +63,11 @@ How **fast** is it to develop a new feature?
 
 ## Angular: RxJS
 
-Angular HTTP client returns Observables
+Angular HTTP client returns Observables.
 
-RxJS is an implementation of Observables
+RxJS is an implementation of Observables.
 
-Observables are suitable for stream-like data
+Observables are suitable for stream-like data.
 
 ```notes
 - Angular’s HTTP client returns Observables instead of Promises, forcing you not only to learn another async library, but a completely different async paradigm.
@@ -103,9 +89,9 @@ Observables are suitable for stream-like data
 
 ## Angular: RxJS
 
-Require a paradigm shift to RFP (Reactive Functional Programming)
+Require a paradigm shift to RFP (Reactive Functional Programming).
 
-Over-complicate for most REST API calls
+Over-complicate for most REST API calls.
 
 ---
 
@@ -141,19 +127,21 @@ To learn more:
 
 ## Back to our Goals
 
-Again, imagine yourself as a new hire
+Again, imagine yourself as a new hire.
 
-**Productiviy**: embrace simple and effective solutions
+**Productiviy**: Embrace simple and effective solutions.
 
-**Community**: Use something widely supported from the community
+**Community**: Use something widely supported in the community.
+
+**Maturity**: Rely on something battle-proven over a long period of time.
 
 ---
 
 ## How can we get there?
 
-Replace Angular's HTTP client with Promise based client (e.g., Axios)
+Replace Angular's HTTP client with Promise based client (e.g., Axios).
 
-Use RxJS observables only where they are appropriate
+Use RxJS observables only where they are appropriate.
 
 ---
 
@@ -226,9 +214,9 @@ The knowledge required to work with these DSLs cannot be borrowed from outside, 
 
 ## How do we improve?
 
-Re-use what JavaScript developers already know -- JavaScript
+Re-use what JavaScript developers already know -- JavaScript.
 
-No need for DSL for basic statements
+No need for DSL to code basic statements.
 
 ---
 
@@ -256,7 +244,7 @@ Every software developer knows ternary operators:
 
 `(condition? A: B)`
 
-No ramp up time required to learn a special DSL
+No ramp up time required to learn a special DSL.
 
 ---
 
@@ -295,7 +283,7 @@ function App({items}) {
 
 Even more exmaple:
 
-Angular slice filter. Again, special DSL:
+Angular's slice filter. Again, special DSL:
 ```html
 <p>{{ name | slice:1:5 }}</p>
 ```
@@ -323,11 +311,11 @@ All these smalls could potentially add up to the loss of daily productivity.
 
 ## Recap: how do we improve?
 
-Once more, imagine yourself as a new hire
+Once more, imagine yourself as a new hire.
 
-**Productivity**: leverage JavaScript to deal with logics and code path
+**Productivity**: Let JavaScript deal with logics and code path. Do what it is best at.
 
-**Productivity**: Use standard JavaScript APIs rather than awkward DSLs
+**Maturity/Productivity**: Use standard JavaScript APIs instead of non-standard DSLs.
 
 ---
 
@@ -338,9 +326,9 @@ Once more, imagine yourself as a new hire
 
 ## Angular: Ng CLI
 
-Ng CLI is Angular's recommended building tools
+Ng CLI is Angular's recommended building tools.
 
-Widely adopted for its out-of-box functionalities
+Widely adopted for its out-of-box functionalities.
 
 ---
 
@@ -370,13 +358,13 @@ However, in Angualr webpack configuration is generated and encapsulated.
 
 Angular's `ng eject` command can be used to "eject" webpack configuration.
 
-... but even this feature will be **disabled in Angular 6**.
+... but even this hacky feature is **disabled in Angular 6**.
 
 ---
 
 ## Angular 6 and Webpack
 
-Angular 6 will introduce *a new builder system* which is an abstraction layer on top of many building processes including webpack.
+Angular 6 will introduce *a new builder system* which is an abstraction layer on top of many build tools including webpack.
 
 However, this system is **not ready**. And no announcement of when it will be ready.
 
@@ -385,6 +373,32 @@ However, this system is **not ready**. And no announcement of when it will be re
 <Image src="assets/images/webpack-ng6-soon.png" size="contain" />
 
 ---
+
+## Undocumented breaking change
+
+Yet, the `ng eject` is already disabled, even before the new build system is released.
+
+And this critical breaking change is not even documented.
+
+---
+
+<Image src="assets/images/ng6-undocumented-breaking-change.png" size="contain" />
+
+---
+
+There is no migration path at this moment.
+
+---
+
+When a breaking change was introduced in React, React owners created a tool to **automatically migrate** the affected source code.
+
+https://github.com/reactjs/react-codemod
+
+Note: this tool comes from React's official GitHub.
+
+---
+
+## Angular 6 new build system
 
 Even when the new builder system is ready in an unknown future, I doubt why we need yet another build system to abstract most already well known build tools, including Webpack.
 
@@ -402,54 +416,49 @@ This over abstraction is **unnecessary** and even **dangerous**.
 
 ---
 
-Our business requires high-level of customization and performance.
+A UI framework should not try to dictate the building process and tools.
+
+The tail should not wag the dog.
+
+---
+
+YUI, jQuery, and even the infamous Struts didn't dictate how we build web assets.
+
+*In a sense, Angular is worse than AngularJS when it comes to framework lock-in.*
+
+---
+
+Our business requires high-level of customization and scalability.
 
 Having full control of our building process is essential to create highly customizable and scalable web apps.
 
 ---
 
+## How can we improve?
 
+Back to the principle:
+
+**Maturity**: No over abstraction.
+
+**Productivity**: Control the build tools directly.
+
+**Community**: Rely on more complete documentation of individual build tools.
 
 ---
 
-<Image src="assets/images/webpack-kindergarten.png" size="contain" />
+## Which means
 
----
+Use *Webpack* directly for bundling and optimization.
 
-```notes
-React Pros:
-- Virtual DOM - server side rendering
-  * Angular Universal is a library designed to make your app friendly to search engine and social media. This tool allows you to create projects that support server-side rendering. As for React, SSR can be set up without any additional tools since ‘renderToString’ comes from ‘react-dom’ package, which is used for client-side rendering.
-  * React Native for iOS and Andriod - allowing developers to share 90% or more of the code across mobile platforms with truly native rendering performance.
-  * Microsoft would later release React Native libraries for building Windows applications
-  * Facebook released Snapchat-like features across Instagram, Messenger, WhatsApp, and Facebook. Blocked Snapchat's growth.
-- JSX compiler
-- JS-first philosophy - Just Javascript
-- Easy to learn
-- High level of flexibility and composability
-- Unopinonated
-- Separation of presentation and data - Smart vs dumb component (account-summary component)
+Use *Lerna* to manage mono repo.
 
-Angular Cons:
-- Heavy framework
-  * Too many terminologies - It even speaks its own language - structural directives, pipes, declarations, modules, injectors, services, view encapsulation, decorators.
-  * Large learning curve
-- RxJS
-- Template driven
-  * HTML parser
-  * Or use AOT compiler. But AOT has a lot of constraints of how you write your code
-    * https://angular.io/guide/aot-compiler#how-aot-works
-    * Issue: No default export class (https://github.com/angular/angular/issues/11402). Open since 9/6/2016
-    * Having two different compilers is dangerous.
-  * Angular 4’s release notes even went as far to tout “else” with *ngIf as a new feature.
-  * It can take 10x as much code in Angular and more wiring and ceremony to describe the same output. (Productivity)
-- Opinionated
-  * Opinionated framework needs a buy-in phase.
-  * As engineers, we should make educated choices rather than simply following opinions, even when the opinions coming from big players.
-- DI is not necessarily needed
-- Native ShadowDOM support is minimal (https://caniuse.com/#feat=shadowdom)
-  * Make people question the maturity of Angular
-```
+Use *npm* or *yarn* in place of *ng*.
+
+Control our own test setup.
+
+Control our own test coverage.
+
+... etc.
 
 ---
 
@@ -474,23 +483,6 @@ Unit test styles.
 ---
 
 <Image src="assets/images/shadow-dom-emulation.png" size="contain" />
-
----
-
-
----
-
-Angular:
-
-```html
-<p>{{ name | slice:1:5 }}</p>
-```
-
-React:
-
-```jsx
-<p>{name.slice(1,5)}</p>
-```
 
 ---
 
@@ -532,40 +524,36 @@ A 2018 survey of more than 60,000 worldwide open positions that require a specif
 
 ---
 
-# About Me
+```notes
+React Pros:
+- Virtual DOM - server side rendering
+  * Angular Universal is a library designed to make your app friendly to search engine and social media. This tool allows you to create projects that support server-side rendering. As for React, SSR can be set up without any additional tools since ‘renderToString’ comes from ‘react-dom’ package, which is used for client-side rendering.
+  * React Native for iOS and Andriod - allowing developers to share 90% or more of the code across mobile platforms with truly native rendering performance.
+  * Microsoft would later release React Native libraries for building Windows applications
+  * Facebook released Snapchat-like features across Instagram, Messenger, WhatsApp, and Facebook. Blocked Snapchat's growth.
+- JSX compiler
+- JS-first philosophy - Just Javascript
+- Easy to learn
+- High level of flexibility and composability
+- Unopinonated
+- Separation of presentation and data - Smart vs dumb component (account-summary component)
 
----
-
-```jsx
-<CodeSnippet />
-```
-
----
-
-<Image src="assets/images/puppet.jpg" />
-
----
-
-<ul>
-  <Appear>
-    <li>One</li>
-    <li>Two</li>
-    <li>Three</li>
-  </Appear>
-</ul>
-
----
-
-export default Split
-
-![](assets/images/puppet.jpg)
-
-## Meow
-
----
-
-export default FullScreenCode
-
-```jsx
-<Button>Beep</Button>
+Angular Cons:
+- Heavy framework
+  * Too many terminologies - It even speaks its own language - structural directives, pipes, declarations, modules, injectors, services, view encapsulation, decorators.
+  * Large learning curve
+- Template driven
+  * HTML parser
+  * Or use AOT compiler. But AOT has a lot of constraints of how you write your code
+    * https://angular.io/guide/aot-compiler#how-aot-works
+    * Issue: No default export class (https://github.com/angular/angular/issues/11402). Open since 9/6/2016
+    * Having two different compilers is dangerous.
+  * Angular 4’s release notes even went as far to tout “else” with *ngIf as a new feature.
+  * It can take 10x as much code in Angular and more wiring and ceremony to describe the same output. (Productivity)
+- Opinionated
+  * Opinionated framework needs a buy-in phase.
+  * As engineers, we should make educated choices rather than simply following opinions, even when the opinions coming from big players.
+- DI is not necessarily needed
+- Native ShadowDOM support is minimal (https://caniuse.com/#feat=shadowdom)
+  * Make people question the maturity of Angular
 ```
