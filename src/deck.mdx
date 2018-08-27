@@ -17,9 +17,9 @@ Re-evaluate technical choices for web app development.
 
 - Productivity
 
-- Community
-
 - Maturity
+
+- Community
 
 ---
 
@@ -33,10 +33,9 @@ How **sustainable** is it to maintain the tech stack over time?
 
 How **flexiable** is it to customize the tech stack?
 
----
-
+```notes
 These are the questions we should constantly ask ourselves when exploring a new tech stack.
-
+```
 ---
 
 # The core of existing tech stack -- Angular
@@ -149,13 +148,11 @@ Angular template has its own DSL syntax:
 <p>{{ name | slice:1:5 }}</p>
 ```
 
----
-
-At first, you might think the DSL syntax is OK. But it can quickly get unwieldy.
+At first glance, you might think the DSL syntax is OK. But it could get unwieldy quickly.
 
 ---
 
-for loop
+Special DSL just for a loop
 
 ```html
 <ul>
@@ -165,11 +162,9 @@ for loop
 </ul>
 ```
 
-Special syntax just for a loop.
-
 ---
 
-if-else
+Special DSL for if-else
 
 ```html
 <div *ngIf="someCondition; else falsyTemplate">
@@ -181,7 +176,7 @@ if-else
 </ng-template>
 ```
 
-Again, special syntax just for if and else. Angular 4 even touts “else” with *ngIf as a new feature.
+Angular 4 even touts “else” with *ngIf as a new feature.
 
 ---
 
@@ -195,25 +190,27 @@ When developer's fluency in basic **if-else** statements is in question, what do
 
 ## Angular: HTML Template
 
-This DSL syntax resembles FreeMarker template.
+Angular is template driven.
 
-Template-driven frameworks all invent their own DSLs which are not standard anywhere else.
+Templates all invent their own DSLs which are not standard anywhere else.
+
+...and they are often counter-productive to work with.
 
 ```notes
-The knowledge required to work with these DSLs cannot be borrowed from outside, and cannot be exported to the ourside world.
+The knowledge required to work with these DSLs cannot be borrowed from outside, and cannot be shared with the ourside world.
 ```
 
 ---
 
 ## How do we improve?
 
-Re-use what JavaScript developers already know -- JavaScript.
+No need for HTML DSL to mimic JavaScript code.
 
-No need for DSL to code basic statements.
+Re-use what JavaScript developers already know -- JavaScript.
 
 ---
 
-For example, instead of having:
+For example, instead of writing this:
 ```html
 <div *ngIf="someCondition; else falsyTemplate">
   <h1>Condition Passed!</h1>
@@ -231,15 +228,16 @@ switch to JavaScript ternary operator
 </div>
 ```
 
----
+```notes
 
 Every software developer knows ternary operators:
 
 `(condition? A: B)`
 
 No ramp up time required to learn a special DSL.
+```
 
----
+<!-- ---
 
 More exmaple: a list component using Angular's *ngForOf
 
@@ -258,9 +256,9 @@ export class App {
     return index;
   }
 }
-```
+``` -->
 
----
+<!-- ---
 
 Same component in React with JavaScript's `map` function
 
@@ -270,9 +268,9 @@ function App({items}) {
     {items.map((item, index) => <li key={index}>{item.id}</li>)}
   </ul>
 };
-```
+``` -->
 
----
+<!-- ---
 
 Even more exmaple:
 
@@ -284,21 +282,19 @@ Angular's slice filter. Again, special DSL:
 React. Array's built-in `slice` function:
 ```jsx
 <p>{name.slice(1,5)}</p>
-```
+``` -->
 
 ---
 
-| Angular       | Plain JavaScript                       |
-| ------------- |:--------------------------------------:|
-| *ngForOf      | Array.map                              |
-| *ngIf         | if-else statement or ternary operator  |
-| filter pipe   | plain function                         |
+| Angular       | Plain JavaScript                        |
+| ------------- |:---------------------------------------:|
+| *ngForOf      | Array.map                               |
+| *ngIf         | if-else statement, or ternary operator  |
+| filter pipe   | plain function                          |
 
-Angular invented a DSL syntax because the framework is template driven.
+The root problem is -- Angular tries to use HTML syntax to mimic JavaScript code. But the invented DSL is often verbose and cumbersome to work with.
 
-The DSL deviates away from common JS knowledge.
-
-All these smalls could potentially add up to the loss of daily productivity.
+All these smalls could add up to the potential loss of daily productivity.
 
 ---
 
@@ -306,9 +302,7 @@ All these smalls could potentially add up to the loss of daily productivity.
 
 Once more, imagine yourself as a new hire.
 
-**Productivity**: Let JavaScript deal with logics and code path. Do what it is best at.
-
-**Maturity/Productivity**: Use standard JavaScript APIs instead of non-standard DSLs.
+**Maturity/Productivity**: Use standard JavaScript code instead of non-standard DSLs. Let JavaScript deal with logics and code path. Do what JavaScript is best at.
 
 ---
 
@@ -357,7 +351,7 @@ Angular's `ng eject` command can be used to "eject" webpack configuration.
 
 ## Angular 6 and Webpack
 
-Angular 6 will introduce *a new builder system* which is an abstraction layer on top of many build tools including webpack.
+Angular 6 will introduce *a new custom builder system* which is an abstraction layer on top of many build tools including webpack.
 
 However, this system is **not ready**. And there is no announcement of when it will be ready.
 
@@ -483,71 +477,7 @@ It is about Angular vs. Something better than Angular and its ecosystem
 
 ---
 
-# More on Community
-
----
-
-## Developer preference matters
-
-In GitHub, React has **109,545** stars and **6,244** watches while Angular has **39,862** and **3,174** watches respectively.
-
----
-
-## State of JavaScript 2017
-
-Out of 20,000 developers surveyed, 7,600 developers said they are uninterested in Angular despite of being aware of its popularity while none of the developers said they are uninterested in React.
-
----
-
-<Image src="assets/images/developer-acceptance.png" size="contain" />
-
----
-
-## NPM downloads
-
-Number of npm loads in the past 6 months
-
----
-
-<Image src="assets/images/npm-downloads.png" size="contain" />
-
----
-
-## Market demand
-
-A 2018 survey of more than 60,000 worldwide open positions that require a specific knowledge of a certain framework.
-
-(source: indeed.com)
-
----
-
-<Image src="assets/images/indeed-pie-chart.png" size="contain" />
-
----
-
-## What do all these charts mean to us?
-
----
-
-Larger talent pool
-
-More active community support
-
----
-
-But the thing that really matters:
-
-More sources to copy and paste code from Stackoverflow
-
----
-
-<Image src="assets/images/puppet.jpg" />
-
----
-
-# By the way,
-# this entire slide deck is created in React
-
+# Recap on Productivity
 
 ```notes
 React Pros:
@@ -583,3 +513,133 @@ Angular Cons:
 - Native ShadowDOM support is minimal (https://caniuse.com/#feat=shadowdom)
   * Make people question the maturity of Angular
 ```
+
+---
+
+A dev team’s productivity and the quality of its work are largely **determined by its junior engineers**.
+
+Having a tech stack that has **lower entry barriers** and less chance for errors will definitely boost the team's productivity and quality.
+
+---
+
+## React and Productivity
+
+Low learning curve - the core takes 2 days to master.
+
+Much less core concept - No DI, decorators, pipes, injectors, module declarations, nor special DSL.
+
+Unopinionated - No deep coupling with high-learning-curve libraries at its core.
+
+Usually take less code to achieve the same output.
+
+Newcomer friendly.
+
+---
+
+# Recap on Maturity
+
+---
+
+A framework or library can only be as solid as its foundation, a.k.a. dependencies.
+
+---
+
+## React and Maturity
+
+No experimental features, e.g. decorators.
+
+No non-standard modue system, nor awkward DSLs.
+
+Mature tool chains.
+
+Smooth version upgrade with migration tools and guidance.
+
+No radical breaking changes without migration path.
+
+---
+
+## Misc: React and Quality
+
+Test coverage for HTML and even CSS styles.
+
+---
+
+<Image src="assets/images/style-test.png" size="contain" />
+
+---
+
+HTML, CSS, and JavaScript -- all 3 main building blocks of web apps can now be validated.
+
+---
+
+# More on Community
+
+---
+
+## Developer preference matters
+
+In GitHub, React has **109,545** stars and **6,244** watches while Angular has **39,862** and **3,174** watches respectively.
+
+React Router has **32,176** stars, which is not included in the React count listed above.
+
+---
+
+## State of JavaScript 2017
+
+```notes
+Out of 20,000 developers surveyed, 7,600 developers said they are uninterested in Angular despite of being aware of its popularity while none of the developers said they are uninterested in React.
+```
+
+---
+
+<Image src="assets/images/developer-acceptance.png" size="contain" />
+
+---
+
+## NPM downloads
+
+Number of npm loads in the past 6 months
+
+---
+
+<Image src="assets/images/npm-downloads.png" size="contain" />
+
+---
+
+## Market demand
+
+A 2018 survey of more than 60,000 worldwide open positions that require a specific knowledge of a certain framework.
+
+(source: indeed.com)
+
+---
+
+<Image src="assets/images/indeed-pie-chart.png" size="contain" />
+
+---
+
+## What do all these charts mean to us?
+
+---
+
+Larger talent pool for hiring and mind sharing.
+
+More active community support.
+
+---
+
+But the thing that really matters:
+
+More sources to ctrl+c/ctrl+v code from Stackoverflow ;)
+
+---
+
+<Image src="assets/images/puppet.jpg" />
+
+---
+
+# By the way,
+# this entire slide deck is created in React
+
+
+
